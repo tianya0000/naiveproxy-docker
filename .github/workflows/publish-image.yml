@@ -17,8 +17,6 @@ on:
 env:
   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
   DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-  GHCR_USERNAME: ${{ github.repository_owner }}
-  GHCR_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   PublishImage:
@@ -53,13 +51,6 @@ jobs:
         with:
           username: ${{ env.DOCKERHUB_USERNAME }}
           password: ${{ env.DOCKERHUB_PASSWORD }}
-
-      - name: Log in to ghcr
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ env.GHCR_USERNAME }}
-          password: ${{ env.GHCR_PASSWORD }}
 
       - name: Generate tags
         id: tags
